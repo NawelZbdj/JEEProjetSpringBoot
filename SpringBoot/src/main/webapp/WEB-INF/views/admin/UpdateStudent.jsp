@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.jeeproject.Model.Student" %>
-<%@ page import="com.jeeproject.Model.Administrator" %>
+<%@ page import="com.jeeprojet.springboot.Model.Student" %>
+<%@ page import="com.jeeprojet.springboot.Model.Administrator" %>
 <%
     Student student = (Student) request.getAttribute("student");
 %>

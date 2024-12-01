@@ -1,8 +1,8 @@
-<%@ page import="com.jeeproject.Model.Registration" %>
+<%@ page import="com.jeeprojet.springboot.Model.Registration" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Set" %>
 <%@ page import="java.util.HashSet" %>
-<%@ page import="com.jeeproject.Model.Professor" %><%--
+<%@ page import="com.jeeprojet.springboot.Model.Professor" %><%--
   Created by IntelliJ IDEA.
   User: CYTech Student
   Date: 11/29/2024

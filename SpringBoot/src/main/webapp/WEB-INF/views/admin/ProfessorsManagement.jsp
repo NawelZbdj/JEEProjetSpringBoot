@@ -1,6 +1,6 @@
-<%@ page import="com.jeeproject.Model.Professor" %>
+<%@ page import="com.jeeprojet.springboot.Model.Professor" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.jeeproject.Model.Administrator" %>
+<%@ page import="com.jeeprojet.springboot.Model.Administrator" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>

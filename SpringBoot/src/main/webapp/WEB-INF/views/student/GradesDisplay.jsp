@@ -1,11 +1,11 @@
-<%@ page import="com.jeeproject.Model.Result" %>
+<%@ page import="com.jeeprojet.springboot.Model.Result" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.jeeproject.Model.Course" %>
+<%@ page import="com.jeeprojet.springboot.Model.Course" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.jeeproject.Model.Professor" %>
-<%@ page import="com.jeeproject.Model.Student" %><%--
+<%@ page import="com.jeeprojet.springboot.Model.Professor" %>
+<%@ page import="com.jeeprojet.springboot.Model.Student" %><%--
   Created by IntelliJ IDEA.
   User: CYTech Student
   Date: 11/28/2024

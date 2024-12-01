@@ -1,9 +1,9 @@
-<%@ page import="com.jeeproject.Model.Course" %>
+<%@ page import="com.jeeprojet.springboot.Model.Course" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.jeeproject.Model.Administrator" %>
+<%@ page import="com.jeeprojet.springboot.Model.Administrator" %>
 
 <%--
   Created by IntelliJ IDEA.

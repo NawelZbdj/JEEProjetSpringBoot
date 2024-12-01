@@ -1,6 +1,6 @@
-<%@ page import="com.jeeproject.Model.Course" %>
+<%@ page import="com.jeeprojet.springboot.Model.Course" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.jeeproject.Model.Professor" %>
+<%@ page import="com.jeeprojet.springboot.Model.Professor" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
@@ -56,11 +56,11 @@
 <ul>
     <%
 
-        List<com.jeeproject.Model.Course> courses = (List<Course>) request.getAttribute("coursesList");
+        List<com.jeeprojet.springboot.Model.Course> courses = (List<Course>) request.getAttribute("coursesList");
 
         if (courses != null && !courses.isEmpty()) {
 
-            for (com.jeeproject.Model.Course course : courses) {
+            for (com.jeeprojet.springboot.Model.Course course : courses) {
     %>
     <li>
         <form action="<%= request.getContextPath() %>/StudentController" method="POST">

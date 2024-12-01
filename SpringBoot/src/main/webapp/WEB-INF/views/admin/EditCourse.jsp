@@ -1,5 +1,5 @@
-<%@ page import="com.jeeproject.Model.Course" %>
-<%@ page import="com.jeeproject.Model.Administrator" %><%--
+<%@ page import="com.jeeprojet.springboot.Model.Course" %>
+<%@ page import="com.jeeprojet.springboot.Model.Administrator" %><%--
   Created by IntelliJ IDEA.
   User: CYTech Student
   Date: 11/23/2024

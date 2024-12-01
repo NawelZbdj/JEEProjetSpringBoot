@@ -1,4 +1,4 @@
-<%@ page import="com.jeeproject.Model.Administrator" %>
+<%@ page import="com.jeeprojet.springboot.Model.Administrator" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

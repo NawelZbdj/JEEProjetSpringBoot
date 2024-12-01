@@ -1,7 +1,7 @@
-<%@ page import="com.jeeproject.Model.Student" %>
-<%@ page import="com.jeeproject.Model.Course" %>
+<%@ page import="com.jeeprojet.springboot.Model.Student" %>
+<%@ page import="com.jeeprojet.springboot.Model.Course" %>
 <%@ page import="java.util.*" %>
-<%@ page import="com.jeeproject.Model.Professor" %>
+<%@ page import="com.jeeprojet.springboot.Model.Professor" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>

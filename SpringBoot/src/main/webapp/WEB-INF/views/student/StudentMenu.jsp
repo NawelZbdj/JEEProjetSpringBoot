@@ -1,4 +1,4 @@
-<%@ page import="com.jeeproject.Model.Student" %><%--
+<%@ page import="com.jeeprojet.springboot.Model.Student" %><%--
   Created by IntelliJ IDEA.
   User: CYTech Student
   Date: 11/29/2024
