@@ -1,10 +1,12 @@
-package com.jeeprojet.springboot.Repository;
+package com.jeeprojet.springboot.Model;
 
 import jakarta.persistence.*;
+
+
 import java.util.Date;
 
 @Entity
-@Table(name = "Administrator")
+@Table(name = "administrator")
 public class Administrator implements IUser {
 
     @Id

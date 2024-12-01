@@ -1,4 +1,4 @@
-package com.jeeprojet.springboot.Repository;
+package com.jeeprojet.springboot.Model;
 
 import jakarta.persistence.*;
 
