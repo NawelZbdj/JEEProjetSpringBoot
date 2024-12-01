@@ -14,7 +14,6 @@
 
 <h1>Administrator Details</h1>
 
-<!-- Accéder aux propriétés de l'administrateur en utilisant ${} -->
 <p>
   <b>First Name:</b> ${administrator.firstName}
 </p>
