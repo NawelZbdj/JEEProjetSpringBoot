@@ -9,13 +9,13 @@
 <html>
 <head>
     <title>Menu</title>
-    <link rel="stylesheet" href="css/menuStyle.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/menuStyle.css">
 
 </head>
 <body>
 <div class="page">
     <header class="banner">
-        <img src="image/logoGrey.png" alt="Logo" class="banner-image">
+        <img src="<%=request.getContextPath()%>/image/logoGrey.png" alt="Logo" class="banner-image">
     </header>
     <main class="content">
         <br><br>
