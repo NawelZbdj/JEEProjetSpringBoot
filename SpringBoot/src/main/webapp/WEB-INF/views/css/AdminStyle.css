@@ -1,0 +1,270 @@
+body{
+    background: #efefef;
+}
+
+.page {
+    margin: 30px 100px 0px 100px;
+    padding: 30px;
+    font-family: Arial, sans-serif;
+    background-color: #77936b;
+    color: #333;
+    line-height: 1.6;
+    border: 10px solid #9ec28e;
+    min-height: 100%;
+}
+
+header.banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    margin: 20px auto;
+    background-color: #77936b;
+    border-radius: 10px;
+    max-width: 1000px;
+}
+
+.banner-image {
+    height: 60px;
+    border-radius: 10px;
+}
+
+.logout-button {
+    padding: 10px 20px;
+    background-color: #efefef;
+    color: #77936b;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.logout-button:hover {
+    background-color: #9ec28e;
+}
+
+
+.menu {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 1000px;
+    background-color: #efefef;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.menu li {
+    margin: 0 20px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #77936b;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.menu a:hover {
+    background-color: #77936b;
+    color: #efefef;
+}
+
+main.content {
+    background-color: #ffffff;
+    margin: 20px auto;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 1000px;
+    min-height: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+*{
+    scrollbar-color: #77936b #efefef;
+    scrollbar-width: thin;
+}
+
+h2{
+    font-size: 32px;
+    color: #77936b;
+    font-weight: bold;
+}
+
+button,input[type="submit"] {
+    background-color: #9ec28e;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+button{
+    margin-top: 10px;
+}
+
+button:hover,input[type="submit"]:hover {
+    color: #77936b;
+}
+
+input[type="text"],input[type="password"],input[type="email"],input[type="date"] {
+    border: 1px solid #9ec28e;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #ffffff;
+}
+
+input:hover {
+    border-color: #efefef;
+}
+
+select{
+    border: 1px solid #9ec28e;
+    border-radius: 8px;
+    padding: 5px 10px;
+}
+
+h1{
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+    color: #77936b;
+}
+
+.log {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    margin: 50px auto;
+    border: 2px solid #77936b;
+}
+
+.log label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #77936b;
+    padding-bottom: 10px;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table td {
+    padding: 12px;
+    font-size: 16px;
+    text-align: center;
+    min-width: 70px;
+    background-color: #f9f9f9;
+}
+
+.desc{
+    width : 550px;
+}
+
+table td:hover {
+    background-color: #e0e0e0;
+}
+
+table th {
+    background-color: #77936b;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-size: 18px;
+}
+
+table tr:nth-child(even) td {
+    background-color: #f1f1f1;
+}
+
+.redirect{
+    display: block;
+    width: 60%;
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #77936b;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+
+.link-button{
+    display: inline-block;
+    background-color: darkgrey;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 7px 10px;
+    border-radius: 18px;
+    text-align: center;
+}
+
+.link-button:hover{
+    background-color: #77936b;
+}
+
+.right{
+    text-align: right;
+}
+
+.formAff{
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    min-width: 400px;
+    margin: 50px auto;
+    border: 2px solid #77936b;
+}
+
+.formAff label{
+    font-size: 16px;
+    font-weight: bold;
+    color: #77936b;
+}
+
+
+@media (max-width: 768px) {
+    header.banner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .banner-image {
+        margin-bottom: 10px;
+    }
+
+    .menu li {
+        margin: 10px 0;
+    }
+}
+
+
+

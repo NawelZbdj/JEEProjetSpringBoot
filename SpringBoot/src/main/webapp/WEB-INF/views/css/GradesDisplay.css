@@ -1,0 +1,57 @@
+h2{
+    font-size: 32px;
+    color: #204e78;
+    font-weight: bold;
+}
+
+table{
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+#courseAvg{
+    text-align: right;
+    font-weight: bold;
+    padding-right: 10px;
+    border: 2px solid #efefef;
+    font-size: 18px;
+}
+
+h3{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.course td{
+    background: #efefef;
+    font-size: 17px;
+    padding: 2px 5px 2px 5px;
+    margin: 0;
+    border-bottom: 1px solid dimgrey;
+    border-top: 1px solid dimgrey;
+
+}
+
+
+
+.tablehead td{
+    font-size: 12px;
+    padding-bottom: 7px;
+}
+
+table table td{
+    padding: 8px 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+p{
+    padding: 2px 5px 2px 5px;
+}
+
+#avg{
+    padding: 5px;
+    font-size: 20px;
+    background-color: #b3b3b3;
+}
