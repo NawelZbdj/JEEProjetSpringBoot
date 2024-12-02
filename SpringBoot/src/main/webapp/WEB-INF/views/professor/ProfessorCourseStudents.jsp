@@ -6,7 +6,7 @@
 <html>
 <head>
     <title>Course Students</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/views/css/ProfessorStyle.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ProfessorStyle.css">
 
 </head>
 <body>
@@ -24,7 +24,7 @@
 %>
 <script>
     alert("An issue occurred with the connection.");
-    window.location.href = "<%= request.getContextPath() %>/views/menu.jsp";
+    window.location.href = "<%= request.getContextPath() %>/";
 </script>
 <%
         return;
@@ -34,18 +34,18 @@
 
 <div class="page">
     <header class="banner">
-        <img src="<%=request.getContextPath()%>/views/image/logoBG.png" alt="Logo" class="banner-image">
+        <img src="<%=request.getContextPath()%>/image/logoBG.png" alt="Logo" class="banner-image">
         <button class="logout-button" onclick="logout()">Log out</button>
     </header>
     <script>
         function logout() {
-            window.location.href = '<%= request.getContextPath() %>/views/logout.jsp';
+            window.location.href = '<%= request.getContextPath() %>/logout';
         }
     </script>
     <nav class="menu-bar">
         <ul class="menu">
             <li><a href="<%=request.getContextPath()%>/views/professor/CoursesDisplay.jsp">My Courses</a></li>
-            <li><a href="<%=request.getContextPath()%>/CourseController?action=listByProfessor">Grades management</a></li>
+            <li><a href="<%=request.getContextPath()%>/course/listByProfessor/<%=account.getId()%>">Grades management</a></li>
         </ul>
     </nav>
     <main class="content">
@@ -71,8 +71,7 @@
 
         for (Student student : students) {
     %>
-        <form action="<%= request.getContextPath() %>/ResultController" method="POST">
-            <input type="hidden" name="action" value="viewGrades">
+        <form action="<%= request.getContextPath() %>/result/viewGrades" method="POST">
             <input type="hidden" name="studentId" value="<%= student.getId() %>">
             <input type="hidden" name="courseId" value="<%= course.getId() %>">
             <button type="submit">
@@ -92,7 +91,8 @@
     }
 %>
 
-<br><a href="CourseController?action=listByProfessor">Back to Courses</a>
+<br><a class="link-button" href="<%=request.getContextPath()%>/course/listByProfessor/<%=account.getId()%>">Back to Courses</a>
+
 
     </main>
 </div>

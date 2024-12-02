@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Professor menu</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/views/css/ProfessorStyle.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ProfessorStyle.css">
 </head>
 <body>
 
@@ -26,7 +26,7 @@
 %>
 <script>
     alert("An issue occurred with the connection.");
-    window.location.href = "<%= request.getContextPath() %>/views/menu.jsp";
+    window.location.href = "<%= request.getContextPath() %>/";
 </script>
 <%
         return;
@@ -36,39 +36,36 @@
 
 <div class="page">
     <header class="banner">
-        <img src="<%=request.getContextPath()%>/views/image/logoBG.png" alt="Logo" class="banner-image">
+        <img src="<%=request.getContextPath()%>/image/logoBG.png" alt="Logo" class="banner-image">
         <button class="logout-button" onclick="logout()">Log out</button>
     </header>
     <script>
         function logout() {
-            window.location.href = '<%= request.getContextPath() %>/views/logout.jsp';
+            window.location.href = '<%= request.getContextPath() %>/logout';
         }
     </script>
     <nav class="menu-bar">
         <ul class="menu">
-            <li><a href="<%=request.getContextPath()%>/views/professor/CoursesDisplay.jsp">My Courses</a></li>
-            <li><a href="<%=request.getContextPath()%>/CourseController?action=listByProfessor">Grades management</a></li>
+            <li><a href="<%=request.getContextPath()%>/registration/listByProfessor/<%=account.getId()%>">My Courses</a></li>
+            <li><a href="<%=request.getContextPath()%>/course/listByProfessor/<%=account.getId()%>">Grades management</a></li>
         </ul>
     </nav>
     <main class="content">
         <%
             if (account!=null) {
         %>
-        <p>Welcome, <%=account.getFirstName()%>.</p>
+        <p>Welcome, <%=account.getFirstName()%> <%=account.getLastName()%>.</p>
         <%
             }
-
-
         %>
         <h2>Menu</h2>
 
-
         <table>
             <tr>
-                <td><a class="redirect" href="<%=request.getContextPath()%>/views/professor/CoursesDisplay.jsp">See Courses</a></td>
+                <td><a class="redirect" href="<%=request.getContextPath()%>/registration/listByProfessor/<%=account.getId()%>">See Courses</a></td>
             </tr>
             <tr>
-                <td><a  class="redirect" href="<%=request.getContextPath()%>/CourseController?action=listByProfessor">Grades Management</a></td>
+                <td><a  class="redirect" href="<%=request.getContextPath()%>/course/listByProfessor/<%=account.getId()%>">Grades Management</a></td>
             </tr>
         </table>
     </main>

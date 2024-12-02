@@ -19,9 +19,9 @@
     </header>
     <main class="content">
         <br><br>
-        <a class="redirect" href="student/logStudent.jsp">Student Space</a>
-        <a class="redirect" href="professor/logProfessor.jsp">Professor Space</a>
-        <a class="redirect" href="admin/logAdmin.jsp">Admin Space</a>
+        <a class="redirect" href="student/login">Student Space</a>
+        <a class="redirect" href="professor/login">Professor Space</a>
+        <a class="redirect" href="admin/login">Admin Space</a>
     </main>
 </div>
 </body>

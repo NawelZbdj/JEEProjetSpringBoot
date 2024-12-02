@@ -6,7 +6,7 @@
 <html>
 <head>
     <title>Edit Administrator</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/views/css/AdminStyle.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/AdminStyle.css">
 
 </head>
 <body>
@@ -24,7 +24,7 @@
 %>
 <script>
     alert("An issue occurred with the connection.");
-    window.location.href = "<%= request.getContextPath() %>/views/menu.jsp";
+    window.location.href = "<%= request.getContextPath() %>/";
 </script>
 <%
         return;
@@ -33,25 +33,25 @@
 
 <div class="page">
     <header class="banner">
-        <img src="<%= request.getContextPath() %>/views/image/logoGreen.png" alt="Logo" class="banner-image">
+        <img src="<%= request.getContextPath() %>/image/logoGreen.png" alt="Logo" class="banner-image">
         <button class="logout-button" onclick="logout()">Log out</button>
     </header>
     <script>
         function logout() {
-            window.location.href = '<%= request.getContextPath() %>/views/logout.jsp';
+            window.location.href = '<%= request.getContextPath() %>/logout';
         }
     </script>
     <nav class="menu-bar">
         <ul class="menu">
-            <li><a href="<%=request.getContextPath()%>/views/admin/AdminManagement.jsp">Administrators</a></li>
-            <li><a href="<%=request.getContextPath()%>/views/admin/StudentsManagement.jsp">Students</a></li>
-            <li><a href="<%=request.getContextPath()%>/views/admin/ProfessorsManagement.jsp">Professors</a></li>
-            <li><a href="<%=request.getContextPath()%>/views/admin/CoursesManagementMenu.jsp">Courses</a></li>
+            <li><a href="<%=request.getContextPath()%>/admin">Administrators</a></li>
+            <li><a href="<%=request.getContextPath()%>/student/list">Students</a></li>
+            <li><a href="<%=request.getContextPath()%>/professor">Professors</a></li>
+            <li><a href="<%=request.getContextPath()%>/registration/menu">Courses</a></li>
         </ul>
     </nav>
     <main class="content">
         <h1>Edit Administrator</h1>
-<form method="post" action="<%=request.getContextPath()%>/AdminController?action=update" class="formAff">
+<form method="post" action="<%=request.getContextPath()%>/admin/update/<%=admin.getId()%>" class="formAff">
     <input type="hidden" name="id" value="<%= admin.getId() %>">
 
     <label for="firstName">First Name:</label>

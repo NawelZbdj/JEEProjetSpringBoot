@@ -25,4 +25,9 @@ public class HomeController {
     public String adminLogin() {
         return "admin/logAdmin";
     }
+
+    @GetMapping("/logout")
+    public String logout() {
+        return "logout";
+    }
 }

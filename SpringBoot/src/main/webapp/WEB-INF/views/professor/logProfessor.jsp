@@ -9,13 +9,13 @@
 <html>
 <head>
     <title>Professor log</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/views/css/ProfessorStyle.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ProfessorStyle.css">
 </head>
 <body>
 <div class="page">
     <header class="banner">
-        <a href="<%= request.getContextPath() %>/views/menu.jsp">
-            <img src="<%= request.getContextPath() %>/views/image/logoBG.png" alt="Logo" class="banner-image">
+        <a href="<%= request.getContextPath() %>/">
+            <img src="<%= request.getContextPath() %>/image/logoBG.png" alt="Logo" class="banner-image">
         </a>
     </header>
     <main class="content">
@@ -29,13 +29,12 @@
             }
         %>
 
-        <form action="<%=request.getContextPath()%>/AccountController" method="post" id="log">
+        <form action="<%=request.getContextPath()%>/login" method="post" id="log">
             <label>Username :</label>
             <input type="text" name="username" id="username" required><br>
             <label>Password :</label>
             <input type="password" name="password" id="password" required><br>
             <input type="hidden" name="role" value="professor">
-            <input type="hidden" name="action" value="connect">
             <button type="submit">Connect</button>
         </form>
 

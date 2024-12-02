@@ -5,14 +5,16 @@ import com.jeeprojet.springboot.Model.*;
 import com.jeeprojet.springboot.Repository.CourseRepository;
 import com.jeeprojet.springboot.Repository.*;
 import com.jeeprojet.springboot.Utils.EmailUtil;
+import jakarta.servlet.ServletException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/results")
+@RequestMapping("/result")
 public class ResultController {
 
     @Autowired
@@ -27,32 +29,42 @@ public class ResultController {
     @Autowired
     private RegistrationRepository registrationRepository;
 
-    @Autowired
-    private EmailUtil emailUtil;
 
-    // Récupérer les résultats d'un étudiant par son ID
     @GetMapping("/student/{studentId}")
-    public List<Result> getResultsByStudentId(@PathVariable Long studentId) {
-        return resultRepository.findByStudentId(studentId);
+    public String getResultsByStudentId(Model model, @PathVariable int studentId) {
+        List<Result> results = resultRepository.findByStudentId(studentId);
+        model.addAttribute("results", results);
+        return "student/GradesDisplay";
     }
 
-    // Afficher les notes d'un étudiant pour un cours donné
-    @GetMapping("/viewGrades")
-    public List<Result> viewGrades(@RequestParam Integer studentId, @RequestParam Integer courseId) {
+    @PostMapping("/viewGrades")
+    public String viewGrades(@RequestParam int studentId, @RequestParam int courseId,Model model) {
         Student student = studentRepository.findById(studentId).orElseThrow();
         Course course = courseRepository.findById(courseId).orElseThrow();
+        List<Result> resultsList = resultRepository.findByStudentIdAndCourseId(studentId, courseId);
+        model.addAttribute("results", resultsList);
+        model.addAttribute("student", student);
+        model.addAttribute("course", course);
 
-        // Vous pouvez inclure des informations supplémentaires dans la réponse
-        return resultRepository.findByStudentAndCourse(student, course);
+        return "professor/ProfessorStudentGrades";
+    }
+    @GetMapping("/viewGradesGet/{studentId}/{courseId}")
+    public String viewGradesGet(@PathVariable int studentId, @PathVariable int courseId,Model model) {
+        Student student = studentRepository.findById(studentId).orElseThrow();
+        Course course = courseRepository.findById(courseId).orElseThrow();
+        List<Result> resultsList = resultRepository.findByStudentIdAndCourseId(studentId, courseId);
+        model.addAttribute("results", resultsList);
+        model.addAttribute("student", student);
+        model.addAttribute("course", course);
+
+        return "professor/ProfessorStudentGrades";
     }
 
-    // Ajouter une nouvelle note
     @PostMapping("/addGrade")
-    public Result addGrade(@RequestParam Integer studentId, @RequestParam Integer courseId) {
+    public String addGrade(@RequestParam int studentId, @RequestParam int courseId,Model model) {
         Student student = studentRepository.findById(studentId).orElseThrow();
         Course course = courseRepository.findById(courseId).orElseThrow();
 
-        // Valeurs par défaut
         double grade = 0.0;
         double coefficient = 1.0;
 
@@ -65,20 +77,15 @@ public class ResultController {
 
         resultRepository.save(result);
 
-        // Envoi de l'email
-        String subject = "New Grade in " + course.getTitle();
-        String body = String.format("Hello %s,\n\nA new grade has been registered in %s.\nGrade: %.2f\nCoefficient: %.2f\n\nBest Regards,\nAdmin",
-                student.getFirstName(), course.getTitle(), result.getGrade(), result.getCoefficient());
-        emailUtil.sendEmail(student.getEmail(), subject, body);
+        model.addAttribute("result",result);
 
-        return result;
+        return "redirect:/result/viewGradesGet/" + studentId + "/" + courseId;
     }
 
-    // Sauvegarder ou mettre à jour les notes
     @PostMapping("/saveGrades")
-    public List<Result> saveGrades(@RequestParam Integer studentId, @RequestParam Integer courseId,
+    public String saveGrades(@RequestParam int studentId, @RequestParam int courseId,
                                    @RequestParam List<Double> grades, @RequestParam List<Double> coefficients,
-                                   @RequestParam List<Integer> resultIds) {
+                                   @RequestParam List<Integer> resultIds, Model model) {
         if (grades.size() != coefficients.size() || grades.size() != resultIds.size()) {
             throw new IllegalArgumentException("Mismatch between number of grades, coefficients, and result IDs");
         }
@@ -86,7 +93,7 @@ public class ResultController {
         for (int i = 0; i < grades.size(); i++) {
             double grade = grades.get(i);
             double coefficient = coefficients.get(i);
-            Integer resultId = resultIds.get(i);
+            int resultId = resultIds.get(i);
 
             Registration registration = registrationRepository.findByStudentAndCourse(studentId, courseId);
 
@@ -99,7 +106,49 @@ public class ResultController {
             }
         }
 
-        // Retourne les résultats actualisés
-        return resultRepository.findByStudentIdAndCourseId(studentId, courseId);
+        resultRepository.findByStudentIdAndCourseId(studentId, courseId);
+
+
+        if (grades != null && coefficients != null && grades.size() == coefficients.size()) {
+
+            for (int i = 0; i < grades.size(); i++) {
+
+                double grade = grades.get(i);
+                double coefficient = coefficients.get(i);
+                int resultId = resultIds.get(i);
+
+                Registration registration = registrationRepository.findByStudentAndCourse(studentId, courseId);
+
+                if (registration != null) {
+
+                    Result result = new Result();
+                    result.setId(resultId);
+                    result.setGrade(grade);
+                    result.setCoefficient(coefficient);
+                    result.setRegistration(registration);
+
+
+                    resultRepository.save(result);
+                }
+
+            }
+        } else {
+
+            throw new IllegalArgumentException("parameters issue");
+        }
+
+        Student student = studentRepository.findById(studentId).orElseThrow();
+        Course course = courseRepository.findById(courseId).orElseThrow();
+        List<Result> results = resultRepository.findByStudentIdAndCourseId(studentId, courseId);
+
+
+
+
+        model.addAttribute("student", student);
+        model.addAttribute("course", course);
+        model.addAttribute("results", results);
+
+        return "professor/ProfessorStudentGrades";
     }
+
 }

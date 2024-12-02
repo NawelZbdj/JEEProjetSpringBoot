@@ -37,38 +37,46 @@ public class AccountController {
                               Model model) {
         Account account = accountRepository.findByUsernameAndPassword(username, password);
 
+        model.addAttribute("role", role);
+
+        if (role == null) {
+            return "menu";
+        }
+
         if (account == null) {
             model.addAttribute("errorMessage", "Unknown username or password.");
-            return "redirect:/login";
+            if("admin".equals(role)){
+                return "admin/logAdmin";
+            } else if("student".equals(role)){
+                return "student/logStudent";
+            }
+            else if("professor".equals(role)){
+                return "professor/logProfessor";
+            } else{
+                return "menu";
+            }
         }
 
         model.addAttribute("user", account);
-        model.addAttribute("role", role);
 
         switch (role) {
             case "admin":
                 Administrator admin = administratorRepository.findByAccountId(account.getId());
                 model.addAttribute("user", admin);
-                return "redirect:/admin/menu";
+                return "admin/AdminMenu";
 
             case "professor":
                 Professor professor = professorRepository.findByAccountId(account.getId());
                 model.addAttribute("user", professor);
-                return "redirect:/professor/menu";
+                return "professor/ProfessorMenu";
 
             case "student":
                 Student student = studentRepository.findByAccountId(account.getId());
                 model.addAttribute("user", student);
-                return "redirect:/student/menu";
+                return "student/StudentMenu";
 
             default:
-                return "redirect:/menu";
+                return "menu";
         }
-    }
-
-    @GetMapping("/logout")
-    public String logout(SessionStatus sessionStatus) {
-        sessionStatus.setComplete(); // Clear session attributes
-        return "redirect:/login";
     }
 }

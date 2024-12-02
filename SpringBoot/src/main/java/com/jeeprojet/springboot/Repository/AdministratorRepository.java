@@ -18,6 +18,12 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
             "AND (:position IS NULL OR a.position = :position)")
     List<Administrator> searchByKeywordAndPosition(@Param("keyword") String keyword, @Param("position") String position);
 
+    @Query("SELECT a FROM Administrator a WHERE " +
+            "LOWER(a.firstName) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+            "OR LOWER(a.lastName) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+    List<Administrator> searchByKeyword(@Param("keyword") String keyword);
+
+
     // Custom query for finding an administrator by associated account ID
     @Query("SELECT a FROM Administrator a WHERE a.account.id = :accountId")
     Administrator findByAccountId(@Param("accountId") int accountId);

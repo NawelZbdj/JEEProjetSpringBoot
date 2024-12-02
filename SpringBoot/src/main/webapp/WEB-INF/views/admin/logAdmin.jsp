@@ -9,13 +9,13 @@
 <html>
 <head>
     <title>Admin log</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/views/css/AdminStyle.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/AdminStyle.css">
 </head>
 <body>
 <div class="page">
     <header class="banner">
-        <a href="<%= request.getContextPath() %>/views/menu.jsp">
-            <img src="<%= request.getContextPath() %>/views/image/logoGreen.png" alt="Logo" class="banner-image">
+        <a href="<%= request.getContextPath() %>/">
+            <img src="<%= request.getContextPath() %>/image/logoGreen.png" alt="Logo" class="banner-image">
         </a>       </header>
     <main class="content">
         <h1>Log in</h1>
@@ -28,13 +28,12 @@
             }
         %>
 
-        <form action="<%=request.getContextPath()%>/AccountController" method="post" class="log">
+        <form action="<%=request.getContextPath()%>/login" method="post" class="log">
             <label>Username :</label>
             <input type="text" name="username" id="username" required><br>
             <label>Password :</label>
             <input type="password" name="password" id="password" required><br>
             <input type="hidden" name="role" value="admin">
-            <input type="hidden" name="action" value="connect">
             <button type="submit">Connect</button>
         </form>
     </main>

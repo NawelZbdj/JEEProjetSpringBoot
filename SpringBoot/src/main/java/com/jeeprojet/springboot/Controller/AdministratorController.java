@@ -8,8 +8,10 @@ import com.jeeprojet.springboot.Utils.AccountUtils.PasswordGenerator;
 import com.jeeprojet.springboot.Utils.AccountUtils.UsernameGenerator;
 import com.jeeprojet.springboot.Utils.EmailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -62,10 +64,8 @@ public class AdministratorController {
 
         accountRepository.save(adminAccount);
 
-        // Associate the Administrator entity with the Account
         admin.setAccount(adminAccount);
 
-        // Save Administrator
         administratorRepository.save(admin);
 
         // Send email
@@ -129,8 +129,22 @@ public class AdministratorController {
 
     @GetMapping("/search")
     public String searchAdministrators(@RequestParam("keyword") String keyword, @RequestParam("position") String position, Model model) {
-        List<Administrator> administrators = administratorRepository.searchByKeywordAndPosition(keyword, position);
+        List<Administrator> administrators =  null;
+
+        if (position == null || position.isEmpty()) {
+            administrators =  administratorRepository.searchByKeyword(keyword);
+        } else {
+            administrators = administratorRepository.searchByKeywordAndPosition(keyword, position);
+        }
+
         model.addAttribute("administrators", administrators);
         return "admin/AdminManagement";
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 }

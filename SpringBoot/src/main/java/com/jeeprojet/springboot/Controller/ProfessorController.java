@@ -8,8 +8,10 @@ import com.jeeprojet.springboot.Utils.AccountUtils.PasswordGenerator;
 import com.jeeprojet.springboot.Utils.AccountUtils.UsernameGenerator;
 import com.jeeprojet.springboot.Utils.EmailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -18,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/professors")
+@RequestMapping("/professor")
 public class ProfessorController {
 
     @Autowired
@@ -63,10 +65,8 @@ public class ProfessorController {
 
         accountRepository.save(professorAccount);
 
-        // Associate the Professor entity
         professor.setAccount(professorAccount);
 
-        // Save Professor
         professorRepository.save(professor);
 
         // Send email
@@ -81,7 +81,7 @@ public class ProfessorController {
             e.printStackTrace();
         }
 
-        return "redirect:/professors";
+        return "redirect:/professor";
     }
 
     @GetMapping("/edit/{id}")
@@ -95,8 +95,7 @@ public class ProfessorController {
     @PostMapping("/edit/{id}")
     public String updateProfessor(@PathVariable int id, @ModelAttribute Professor updatedProfessor,
                                   @RequestParam("birthDate") String birthDateString) {
-        Professor professor = professorRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid professor ID: " + id));
+        Professor professor = professorRepository.findById(id).orElseThrow();
 
         try {
             Date birthDate = new SimpleDateFormat("yyyy-MM-dd").parse(birthDateString);
@@ -112,13 +111,13 @@ public class ProfessorController {
         professor.setBirthDate(updatedProfessor.getBirthDate());
 
         professorRepository.save(professor);
-        return "redirect:/professors";
+        return "redirect:/professor";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteProfessor(@PathVariable int id) {
         professorRepository.deleteById(id);
-        return "redirect:/professors";
+        return "redirect:/professor";
     }
 
     @GetMapping("/search")
@@ -127,6 +126,13 @@ public class ProfessorController {
                                    Model model) {
         List<Professor> professors = professorRepository.searchByKeywordAndSpecialty(keyword, specialty);
         model.addAttribute("professors", professors);
-        return "admin/ProfessorsManagement"; // JSP/HTML view name
+        return "admin/ProfessorsManagement";
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 }

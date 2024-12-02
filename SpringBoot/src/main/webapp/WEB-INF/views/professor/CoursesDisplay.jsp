@@ -13,7 +13,7 @@
 <html>
 <head>
     <title>Professor - Courses display</title>
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/views/css/ProfessorStyle.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ProfessorStyle.css">
 
 </head>
 <body>
@@ -31,7 +31,7 @@
 %>
 <script>
   alert("An issue occurred with the connection.");
-  window.location.href = "<%= request.getContextPath() %>/views/menu.jsp";
+  window.location.href = "<%= request.getContextPath() %>/";
 </script>
 <%
     return;
@@ -40,27 +40,24 @@
 
 <div class="page">
   <header class="banner">
-    <img src="<%=request.getContextPath()%>/views/image/logoBG.png" alt="Logo" class="banner-image">
+    <img src="<%=request.getContextPath()%>/image/logoBG.png" alt="Logo" class="banner-image">
     <button class="logout-button" onclick="logout()">Log out</button>
   </header>
   <script>
     function logout() {
-      window.location.href = '<%= request.getContextPath() %>/views/logout.jsp';
+      window.location.href = '<%= request.getContextPath() %>/logout';
     }
   </script>
   <nav class="menu-bar">
     <ul class="menu">
-      <li><a href="<%=request.getContextPath()%>/views/professor/CoursesDisplay.jsp">My Courses</a></li>
-      <li><a href="<%=request.getContextPath()%>/CourseController?action=listByProfessor">Grades management</a></li>
+      <li><a href="<%=request.getContextPath()%>/registration/listByProfessor/<%=account.getId()%>">My Courses</a></li>
+      <li><a href="<%=request.getContextPath()%>/course/listByProfessor/<%=account.getId()%>">Grades management</a></li>
     </ul>
   </nav>
   <main class="content">
 <%
-  if(request.getAttribute("registration") == null){
-    response.sendRedirect(request.getContextPath() + "/RegistrationController?action=listByProfessor&destination=/views/professor/CoursesDisplay.jsp");
-  }
-  else{
-    List<Registration> registrationList = (List<Registration>) request.getAttribute("registration");
+
+    List<Registration> registrationList = (List<Registration>) request.getAttribute("registrations");
     if(registrationList.isEmpty()){
  %>
   <p>No courses assigned yet</p>
@@ -82,7 +79,7 @@
   </tr>
   <%
     }
-  }
+
 }
 %>
 </table>

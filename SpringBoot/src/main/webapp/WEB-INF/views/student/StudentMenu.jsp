@@ -1,34 +1,24 @@
-<%@ page import="com.jeeprojet.springboot.Model.Student" %><%--
-  Created by IntelliJ IDEA.
-  User: CYTech Student
-  Date: 11/29/2024
-  Time: 4:47 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.jeeprojet.springboot.Model.Student" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Student menu</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/views/css/StudentStyle.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/StudentStyle.css">
 </head>
 
 <body>
 
 <%
-    Student account = null;
-    try {
-        account = (Student)session.getAttribute("user");
-    }
-    catch(Exception e){
-        account = null;
-    }
-    if (account==null || !"student".equals(session.getAttribute("role"))){
+    Student account = (Student) session.getAttribute("user");
+    String role = (String) session.getAttribute("role");
+
+    if (account == null || !"student".equals(role)) {
         session.invalidate();
 %>
-    <script>
-        alert("An issue occurred with the connection.");
-        window.location.href = "<%= request.getContextPath() %>/views/menu.jsp";
-    </script>
+<script>
+    alert("An issue occurred with the connection.");
+    window.location.href = "<%= request.getContextPath() %>/";
+</script>
 <%
         return;
     }
@@ -36,38 +26,37 @@
 
 <div class="page">
     <header class="banner">
-        <img src="<%= request.getContextPath() %>/views/image/logoBlue.png" alt="Logo" class="banner-image">
+        <img src="<%= request.getContextPath() %>/image/logoBlue.png" alt="Logo" class="banner-image">
         <button class="logout-button" onclick="logout()">Log out</button>
     </header>
+
     <script>
         function logout() {
-            window.location.href = '<%= request.getContextPath() %>/views/logout.jsp';
+            window.location.href = '<%= request.getContextPath() %>/logout';
         }
     </script>
+
     <nav class="menu-bar">
         <ul class="menu">
-            <li><a href="<%=request.getContextPath()%>/views/student/GradesDisplay.jsp">My results</a></li>
-            <li><a href="<%=request.getContextPath()%>/views/student/RegistrationManagement.jsp">My courses</a></li>
+            <li><a href="<%=request.getContextPath()%>/result/student/<%=account.getId()%>">My results</a></li>
+            <li><a href="<%= request.getContextPath() %>/registration/listByStudent/<%=account.getId()%>">My courses</a></li>
         </ul>
     </nav>
-    <main class="content">
-<%
-    if (account!=null) {
-%>
-        <p>Welcome, <%=account.getFirstName()%>.</p>
-<%
-    }
-%>
-<h2>Menu</h2>
 
-    <table>
-        <tr>
-            <td><a class="redirect" href="<%=request.getContextPath()%>/views/student/GradesDisplay.jsp">My Results</a></td>
-        </tr>
-        <tr>
-            <td><a  class="redirect" href="<%=request.getContextPath()%>/views/student/RegistrationManagement.jsp">My Courses </a></td>
+    <main class="content">
+        <% if (account != null) { %>
+        <p>Welcome, <%= account.getFirstName() %> <%= account.getLastName() %>.</p>
+        <% } %>
+        <h2>Menu</h2>
+
+        <table>
+            <tr>
+                <td><a class="redirect" href="<%=request.getContextPath()%>/result/student/<%=account.getId()%>">My Results</a></td>
             </tr>
-    </table>
+            <tr>
+                <td><a class="redirect" href="<%= request.getContextPath() %>/registration/listByStudent/<%=account.getId()%>">My Courses</a></td>
+            </tr>
+        </table>
 
     </main>
 </div>

@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Professor Management</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/views/css/AdminStyle.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/AdminStyle.css">
 
 </head>
 <body>
@@ -23,7 +23,7 @@
 %>
 <script>
     alert("An issue occurred with the connection.");
-    window.location.href = "<%= request.getContextPath() %>/views/menu.jsp";
+    window.location.href = "<%= request.getContextPath() %>/";
 </script>
 <%
         return;
@@ -31,39 +31,44 @@
 %>
 <div class="page">
     <header class="banner">
-        <img src="<%= request.getContextPath() %>/views/image/logoGreen.png" alt="Logo" class="banner-image">
+        <img src="<%= request.getContextPath() %>/image/logoGreen.png" alt="Logo" class="banner-image">
         <button class="logout-button" onclick="logout()">Log out</button>
     </header>
     <script>
         function logout() {
-            window.location.href = '<%= request.getContextPath() %>/views/logout.jsp';
+            window.location.href = '<%= request.getContextPath() %>/logout';
         }
     </script>
     <nav class="menu-bar">
         <ul class="menu">
-            <li><a href="<%=request.getContextPath()%>/views/admin/AdminManagement.jsp">Administrators</a></li>
-            <li><a href="<%=request.getContextPath()%>/views/admin/StudentsManagement.jsp">Students</a></li>
-            <li><a href="<%=request.getContextPath()%>/views/admin/ProfessorsManagement.jsp">Professors</a></li>
-            <li><a href="<%=request.getContextPath()%>/views/admin/CoursesManagementMenu.jsp">Courses</a></li>
+            <li><a href="<%=request.getContextPath()%>/admin">Administrators</a></li>
+            <li><a href="<%=request.getContextPath()%>/student/list">Students</a></li>
+            <li><a href="<%=request.getContextPath()%>/professor">Professors</a></li>
+            <li><a href="<%=request.getContextPath()%>/registration/menu">Courses</a></li>
         </ul>
     </nav>
     <main class="content">
 <h1>Professor Management</h1>
 
-<form method="get" action="<%=request.getContextPath()%>/ProfessorController" class="formAff">
-    <input type="hidden" name="action" value="search">
+<form method="get" action="<%=request.getContextPath()%>/professor/search" class="formAff">
     <label for="keyword">Search:</label>
-    <input type="text" name="keyword" id="keyword" placeholder="Name or email">
+    <input type="text" name="keyword" id="keyword" placeholder="Firstname or Lastname">
     <label for="specialty">Specialty:</label>
     <select name="specialty" id="specialty">
         <option value="">All</option>
         <option value="computerScience">Computer Science</option>
         <option value="Art">Art</option>
+        <option value="Physics">Physics</option>
+        <option value="Mathematics">Mathematics</option>
+        <option value="Chemistry">Chemistry</option>
+        <option value="History">History</option>
+        <option value="English">English</option>
+
     </select>
     <button type="submit">Search</button>
 </form>
 
-<a class="link-button" href="<%=request.getContextPath()%>/ProfessorController?action=add">Add New Professor</a>
+<a class="link-button" href="<%=request.getContextPath()%>/professor/add">Add New Professor</a>
 
 
 
@@ -80,10 +85,6 @@
     </thead>
     <tbody>
     <%
-        if(request.getAttribute("professors") == null) {
-            response.sendRedirect(request.getContextPath() + "/ProfessorController?action=list");
-        }
-        else{
         List<Professor> professors = (List<Professor>) request.getAttribute("professors");
 
         if (professors != null && !professors.isEmpty()) {
@@ -96,8 +97,8 @@
         <td><%= professor.getEmail() %></td>
         <td><%= professor.getSpecialty() %></td>
         <td>
-            <a class="link-button" href="<%=request.getContextPath()%>/ProfessorController?action=update&id=<%= professor.getId() %>&destination=/views/admin/UpdateProfessor.jsp">Edit</a> |
-            <a class="link-button" href="ProfessorController?action=delete&id=<%= professor.getId() %>" onclick="return confirm('Are you sure?')">Delete</a>
+            <a class="link-button" href="<%=request.getContextPath()%>/professor/edit/<%= professor.getId() %>">Edit</a> |
+            <a class="link-button" href="<%=request.getContextPath()%>/professor/delete/<%= professor.getId() %>" onclick="return confirm('Are you sure?')">Delete</a>
         </td>
     </tr>
     <%
@@ -108,7 +109,7 @@
         <td colspan="6">No professors found.</td>
     </tr>
     <%
-        }
+
         }
     %>
     </tbody>

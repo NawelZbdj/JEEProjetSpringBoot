@@ -7,7 +7,7 @@
 <html>
 <head>
   <title>Student Grades</title>
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/views/css/ProfessorStyle.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ProfessorStyle.css">
 
 </head>
 <body>
@@ -25,7 +25,7 @@
 %>
 <script>
   alert("An issue occurred with the connection.");
-  window.location.href = "<%= request.getContextPath() %>/views/menu.jsp";
+  window.location.href = "<%= request.getContextPath() %>/";
 </script>
 <%
     return;
@@ -35,18 +35,18 @@
 
 <div class="page">
   <header class="banner">
-    <img src="<%=request.getContextPath()%>/views/image/logoBG.png" alt="Logo" class="banner-image">
+    <img src="<%=request.getContextPath()%>/image/logoBG.png" alt="Logo" class="banner-image">
     <button class="logout-button" onclick="logout()">Log out</button>
   </header>
   <script>
     function logout() {
-      window.location.href = '<%= request.getContextPath() %>/views/logout.jsp';
+      window.location.href = '<%= request.getContextPath() %>/logout';
     }
   </script>
   <nav class="menu-bar">
     <ul class="menu">
       <li><a href="<%=request.getContextPath()%>/views/professor/CoursesDisplay.jsp">My Courses</a></li>
-      <li><a href="<%=request.getContextPath()%>/CourseController?action=listByProfessor">Grades management</a></li>
+      <li><a href="<%=request.getContextPath()%>/course/listByProfessor/<%=account.getId()%>">Grades management</a></li>
     </ul>
   </nav>
   <main class="content">
@@ -62,7 +62,7 @@
   if (results != null && !results.isEmpty()) {
 %>
 
-<form action="<%= request.getContextPath() %>/ResultController?action=saveGrades" method="POST">
+<form action="<%= request.getContextPath() %>/result/saveGrades" method="POST">
   <input type="hidden" name="studentId" value="<%= student.getId() %>" />
   <input type="hidden" name="courseId" value="<%= course.getId() %>" />
   <table border="1">
@@ -104,8 +104,7 @@
 %>
 
 
-<form action="<%= request.getContextPath() %>/ResultController" method="POST">
-  <input type="hidden" name="action" value="addGrade">
+<form action="<%= request.getContextPath() %>/result/addGrade" method="POST">
   <input type="hidden" name="studentId" value="<%= student.getId() %>" />
   <input type="hidden" name="courseId" value="<%= course.getId() %>" />
   <button type="submit">Add New Grade</button>
@@ -113,9 +112,9 @@
 
 
 
-<form action="<%= request.getContextPath() %>/StudentController" method="POST">
-  <input type="hidden" name="action" value="listByCourses">
+<form action="<%= request.getContextPath() %>/student/listByCourses" method="POST">
   <input type="hidden" name="courseId" value="<%= course.getId() %>" />
+  <input type="hidden" name="professorId" value="<%= account.getId() %>" />
   <button type="submit">Back to Course Details</button>
 </form>
 

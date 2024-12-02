@@ -24,18 +24,17 @@ public class CourseController {
     private ProfessorRepository professorRepository;
 
     @GetMapping("/list")
-    public String listCourses(Model model, @RequestParam(value = "destination", required = false) String destination) {
+    public String listCourses(Model model) {
         List<Course> courses = courseRepository.findAll();
         model.addAttribute("courses", courses);
-        return destination != null ? "forward:" + destination : "admin/SubjectManagement";  // JSP: /WEB-INF/views/admin/SubjectManagement.jsp
+        return "admin/SubjectManagement";
     }
 
-    @GetMapping("/listByProfessor")
-    public String listCoursesByProfessor(HttpSession session, Model model) {
-        Professor professor = (Professor) session.getAttribute("user");
-        List<Course> coursesList = courseRepository.findByProfessorId(professor.getId());
+    @GetMapping("/listByProfessor/{professorId}")
+    public String listCoursesByProfessor(@PathVariable int professorId, Model model) {
+        List<Course> coursesList = courseRepository.findByProfessorId(professorId);
         model.addAttribute("coursesList", coursesList);
-        return "professor/ProfessorCourses";  // JSP: /WEB-INF/views/professor/ProfessorCourses.jsp
+        return "professor/ProfessorCourses";
     }
 
     @GetMapping("/edit/{id}")
@@ -43,9 +42,9 @@ public class CourseController {
         Course course = courseRepository.findById(id).orElse(null);
         if (course != null) {
             model.addAttribute("course", course);
-            return "admin/EditCourse";  // JSP: /WEB-INF/views/admin/EditCourse.jsp
+            return "admin/EditCourse";
         } else {
-            return "redirect:/course/list?destination=/views/admin/SubjectManagement.jsp";
+            return "redirect:/course/list";
         }
     }
 
@@ -62,7 +61,12 @@ public class CourseController {
         updatedCourse.setCredit(credit);
         updatedCourse.setSpeciality(speciality);
         courseRepository.save(updatedCourse);
-        return "redirect:/course/list?destination=/views/admin/SubjectManagement.jsp";
+        return "redirect:/course/list";
+    }
+
+    @GetMapping("/add")
+    public String showAddForm() {
+        return "admin/AddCourse";
     }
 
     @PostMapping("/save")
@@ -77,13 +81,13 @@ public class CourseController {
         newCourse.setSpeciality(speciality);
 
         courseRepository.save(newCourse);
-        return "redirect:/course/list?destination=/views/admin/SubjectManagement.jsp";
+        return "redirect:/course/list";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteCourse(@PathVariable int id) {
         courseRepository.deleteById(id);
-        return "redirect:/course/list?destination=/views/admin/SubjectManagement.jsp";
+        return "redirect:/course/list";
     }
 }
 

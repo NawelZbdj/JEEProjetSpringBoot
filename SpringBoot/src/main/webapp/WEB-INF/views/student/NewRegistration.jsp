@@ -15,8 +15,8 @@
 <html>
 <head>
     <title>Student - Register for a course</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/views/css/StudentStyle.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/views/css/registrationStyle.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/StudentStyle.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/registrationStyle.css">
 </head>
 <body>
 
@@ -33,7 +33,7 @@
 %>
 <script>
     alert("An issue occurred with the connection.");
-    window.location.href = "<%= request.getContextPath() %>/views/menu.jsp";
+    window.location.href = "<%= request.getContextPath() %>/";
 </script>
 <%
         return;
@@ -42,18 +42,18 @@
 
 <div class="page">
     <header class="banner">
-        <img src="<%=request.getContextPath()%>/views/image/logoBlue.png" alt="Logo" class="banner-image">
+        <img src="<%=request.getContextPath()%>/image/logoBlue.png" alt="Logo" class="banner-image">
         <button class="logout-button" onclick="logout()">Log out</button>
     </header>
     <script>
         function logout() {
-            window.location.href = '<%= request.getContextPath() %>/views/logout.jsp';
+            window.location.href = '<%= request.getContextPath() %>/logout';
         }
     </script>
     <nav class="menu-bar">
         <ul class="menu">
-            <li><a href="<%=request.getContextPath()%>/views/student/GradesDisplay.jsp">My results</a></li>
-            <li><a href="<%=request.getContextPath()%>/views/student/RegistrationManagement.jsp">My courses</a></li>
+            <li><a href="<%= request.getContextPath() %>/result/student/<%=account.getId()%>">My results</a></li>
+            <li><a href="<%= request.getContextPath() %>/registration/listByStudent/<%=account.getId()%>">My courses</a></li>
         </ul>
     </nav>
     <main class="content">
@@ -106,7 +106,7 @@
             <%
                 }else{
             %>
-                <td><a  class="link-button" href="<%= request.getContextPath() %>/RegistrationController?action=add&courseId=<%=course.getId()%>"
+                <td><a  class="link-button" href="<%= request.getContextPath() %>/registration/add/<%=account.getId()%>/<%=course.getId()%>"
                 onclick="return confirm('Are you sure you want to register for <%=course.getTitle()%> ?')">Register</a></td>
             <%
                 }

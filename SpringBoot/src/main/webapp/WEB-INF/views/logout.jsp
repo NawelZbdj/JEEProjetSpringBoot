@@ -13,7 +13,7 @@
 <body>
 <%
   session.invalidate();
-  response.sendRedirect("menu.jsp");
+  response.sendRedirect("/");
 %>
 </body>
 </html>
